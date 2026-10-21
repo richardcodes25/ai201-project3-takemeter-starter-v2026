@@ -39,10 +39,23 @@
 
 ## What This Does
 
-<!-- Your community, and what your classifier sorts posts into. Three or four
-     sentences. -->
+Public posts from [r/patientgamers](https://www.reddit.com/r/patientgamers), a gaming subreddit for writing about games that are already out, not one release and not a launch thread. The text is long enough to collect 200 posts, and it is not one kind of writing: a finished review, a quit note, a question to the sub, and a Game of the Month pitch all show up in the same place. The labels are not chosen yet. These four distinctions are what showed up while reading, and the taxonomy comes after them.
 
+### Candidate distinctions
 
+From about thirty public submissions, plus the comment threads under the quit posts and the question posts. Not "good" and "bad." Each one is something a post either contains or does not.
+
+1. **Some posts put a score on the page. Some never do.** `9/10`, `8.5/10 (Excellent)`, `7.75/10`, `Score: ★★★☆☆`, and a split like Bastion's `Rubric: 80 / Gut: 83 / Average: 81.5`. The Magical Drop VI post explains the orb rule, says "fun as hell," and recommends the game, with no score. The April 2026 Death Stranding Game of the Month post names the developer, the genre, and the platforms, and does not rate it. Question posts ("When do you decide to give up on a game?") have no score because they are not reviews.
+
+2. **Some posts cite a countable amount of play. Some don't.** "After giving this game a proper shake for 20 hours," "Time Played: 17 Hours," "Completed in 5.8 hours over 2 days," "I racked up a total of 44 hours," "my playthrough took 115 hours," "4 hours deep." A one-line blurb can carry a score and still skip the time: "Grand Theft Auto IV (8.5/10): Great game, not much I can say really."
+
+3. **Some posts explain a rule of the game. Some only report a feeling.** Spelldrifter: every action has a time cost instead of a mana cost, so a cheap buff can move you ahead of the enemy. Jusant: the triggers are your two hands. Fashion Police Squad: each weapon corrects one kind of outfit (a dye gun, a needle gun, a sock-removing "grenade"). Magical Drop VI: orbs clear when you place a match in front of a column of two or more. Set against those, "the biggest dud of the year," "fun as hell," and "Great game, not much I can say really."
+
+4. **Some posts say the writer stopped. Some are written from the end. Some are not a play report.** "Abandoned," "Refunded, just couldn't get into it," "I'm just not prepared to spend another 130," "Nah, I'm out" once the skill tree was already done on the road to Sparta. Yearly roundups are mostly games they finished. Separate from both: a question to the sub, and the Game of the Month announcement, which pitches a game for the month instead of reporting a finished play.
+
+The likely hard boundary, if these become labels, is (3). A post can carry a score and a playtime and still never say what the player does, and a post with no score can still explain the system.
+
+Posts this came from include the March 2026 "Chronicles of a Prolific Gamer" (Spelldrifter, Jusant, Fashion Police Squad, Black Book), the January 2026 indie month-in-review, kirso's late 2025 review (including the Sifu refund), fanboy_killer's 2025 roundup, Cmoire's 19 games of 2025, the Magical Drop VI post, the Atlas Fallen review, both Cyberpunk 2077 posts (the category-score comeback writeup and the "where did the time go" 44-hour post), the AC Odyssey "20 hours and I'm moving on" post and its comments, the Supergiant Bastion / Transistor / Pyre post, the Death Stranding Game of the Month pitch, and the question threads on quitting, hours played, and going back to an abandoned game.
 
 ---
 
@@ -162,9 +175,9 @@ of next unit's variance. -->
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* Milestone 1. Pick a public community, read posts from it, and write candidate distinctions from the text.
+- *What came back:* r/patientgamers, and four distinctions taken from the posts: a score on the page, a countable playtime, an explained rule of the game, and a line that says the writer stopped.
+- *What I changed:* Nothing in the distinctions yet. They stay candidates until the taxonomy. The reading notes above are that draft.
 
 **Moment 2**
 
