@@ -126,45 +126,41 @@ Under that rule the Odyssey post is `system`. They have settled ("I'm moving on"
 <!-- Where you collected from, how you labelled, your counts, and three hard
      cases. -->
 
-**Where the posts came from:**
+**Where the posts came from:** Public self-posts on r/patientgamers. Reddit's own listing was refusing logged-out requests, so the text came from the Arctic Shift public archive of those same posts. Each row is the title plus the full body. Nothing was trimmed, and the file is one unsplit `labels.csv`.
 
-**How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
-Say so plainly — the disclosure is required, not penalised. -->
+**How I labelled them:** There is no cold set. An assistant applied the definitions and the decision rule, then the batch was corrected: posts whose only "rule" was a complaint that hitboxes felt wrong were moved to `verdict`, and two posts that do state a rule (the Cyberpunk perk lock, and the crafting-cost roundup) were moved to `system`. Every row is marked `pre-labelled, checked`. Marking any of them `cold` would be false. `ask` is 14.5%, under the 18% floor in criterion 3. Across about 5,000 recent submissions, 29 posts were actually still asking the sub. Finished reviews were not relabelled as questions to fill the quota.
 
 **Counts per label:**
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+| `system` | 82 | 41.0% |
+| `verdict` | 89 | 44.5% |
+| `ask` | 29 | 14.5% |
+| **Total** | 200 | 100% |
 
 **Three hard cases**
 
-<!-- Any post that made you pause: what it was, which two labels it could have
-     been, and what you chose. These are worth more than the easy 190. -->
-
 **1.**
-> *The post:*
+> *The post:* Skate 2, "what am I not getting?" The tricks fail with no reason given, and "the game expects me to keep repeating the same action until it randomly works."
 >
-> *Could have been:*
+> *Could have been:* `system` or `ask`
 >
-> *I chose, because:*
+> *I chose, because:* `ask`. "Until it randomly works" is close to a success condition, and they have not settled what they are doing wrong. The decision rule says a post that is still asking is `ask` even when a rule shows up in the example.
 
 **2.**
-> *The post:*
+> *The post:* "Colony Ship is a solid spiritual heir to Fallout 2. Where can I get more?" The body judges Colony Ship, then asks whether Underrail, Atom RPG, and the Fallout 2 overhaul mods are worth playing.
 >
-> *Could have been:*
+> *Could have been:* `verdict` or `ask`
 >
-> *I chose, because:*
+> *I chose, because:* `ask`. The Colony Ship judgment would stand on its own, and the title question is unanswered. They are still asking what to play next, so the rule puts the whole post in `ask`.
 
 **3.**
-> *The post:*
+> *The post:* Cyberpunk 2077, "the worst 'where did the time go' game." It scores 7.75/10 and says the hours vanished without a memorable moment. It also says deeper perk tiers stay locked unless you have spent the base attribute points, even if you spend perk points in that tree.
 >
-> *Could have been:*
+> *Could have been:* `verdict` or `system`
 >
-> *I chose, because:*
+> *I chose, because:* `system`. The score and the "where did the time go" line are a judgment. The perk lock is a checkable rule, and they have settled, so the rule outranks the tone.
 
 ---
 
@@ -213,7 +209,7 @@ of next unit's variance. -->
 - *What came back:* All five are checkable from `labels.csv` or from the notebook's accuracy, per-label F1, and the two confidence thirds, plus a sort that fixes which 30 rows the agreement check uses. The easy case on accuracy is that question marks and scores are loud features. The hard case is that one seed can drop the Odyssey-style posts into the 15% test split. The same pair of reasons showed up on the F1 floors, the 50% cap, the 0.15 confidence gap, and 24/30.
 - *What I changed:* Nothing in the numbers. Criterion 5 names the sort so the 30 rows are not a private sample.
 
-**Pre-labelling disclosure:**
+**Pre-labelling disclosure:** All 200 rows were pre-labelled from the written definitions and then corrected, as above. None were labelled unaided, so none are marked `cold`. The note on every row is `pre-labelled, checked`.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
