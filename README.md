@@ -207,6 +207,12 @@ of next unit's variance. -->
 - *What came back:* Both Odyssey cases were strong, so the tie was real. Three of the eight would not classify until the rule was explicit: a settled love letter with one stealth-kill level check; an open question that used that same level check as its example; a full rubric scorecard with a single "if they pull you, you cannot dodge" sentence.
 - *What I changed:* Dropped `dropout` as a label. Wrote the priority rule above. Tightened "rule of play" so a genre, an hour count, a score, or "it felt weightless" does not count, and so one spelled-out condition still does, even inside a scorecard.
 
+**Moment 3**
+
+- *What I asked for:* Whether each acceptance criterion could be checked by someone who could not ask what I meant. Then, for each target, one reason it might be too easy and one reason it might be too hard, with no new numbers and no pick of which reason wins.
+- *What came back:* All five are checkable from `labels.csv` or from the notebook's accuracy, per-label F1, and the two confidence thirds, plus a sort that fixes which 30 rows the agreement check uses. The easy case on accuracy is that question marks and scores are loud features. The hard case is that one seed can drop the Odyssey-style posts into the 15% test split. The same pair of reasons showed up on the F1 floors, the 50% cap, the 0.15 confidence gap, and 24/30.
+- *What I changed:* Nothing in the numbers. Criterion 5 names the sort so the 30 rows are not a private sample.
+
 **Pre-labelling disclosure:**
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
