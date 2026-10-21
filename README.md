@@ -168,15 +168,23 @@ Under that rule the Odyssey post is `system`. They have settled ("I'm moving on"
 
 <!-- Your starting model, your settings, and anything you changed and why. -->
 
-**Base model:**
+**Base model:** `distilbert-base-uncased`
 
-**Settings:** <!-- epochs, learning rate, batch size, seed -->
+**Settings:** 3 epochs, learning rate 2e-5, batch size 16, 128 tokens, seed 42.
 
-**Anything I changed from the defaults, and why:**
+**Device:** `mps` — Apple Silicon GPU (MPS), torch 2.14.1. That is what `results.json` recorded. Two runs on the same data and the same seed can still differ when the hardware adds the numbers in a different order.
 
-**Split sizes:** <!-- train / val / test, and per-label counts in the test
-split. If a label had fewer than about 8 in test, say so — it explains a lot
-of next unit's variance. -->
+**Anything I changed from the defaults, and why:** Nothing. Epochs, learning rate, batch size, and token length stayed at the notebook defaults.
+
+**Split sizes:** train 139, val 31, test 30.
+
+| label | train | val | test |
+|---|---|---|---|
+| system | 57 | 13 | 12 |
+| verdict | 62 | 14 | 13 |
+| ask | 20 | 4 | 5 |
+
+`ask` has 5 examples in the test split, under about 8. A metric on that few posts will move a lot between seeds.
 
 
 
@@ -210,6 +218,12 @@ of next unit's variance. -->
 - *What I changed:* Nothing in the numbers. Criterion 5 names the sort so the 30 rows are not a private sample.
 
 **Pre-labelling disclosure:** All 200 rows were pre-labelled from the written definitions and then corrected, as above. None were labelled unaided, so none are marked `cold`. The note on every row is `pre-labelled, checked`.
+
+**Moment 4**
+
+- *What I asked for:* Run notebook sections 1 through 5 on this project's `.venv`, with the label map set to the CSV, and leave the training defaults alone.
+- *What came back:* The data check printed nothing to fix. The split put 5 `ask` posts in the test set. Training finished on `mps` and wrote `results.json` and `test_split.csv`.
+- *What I changed:* Name and email in the notebook, so the results are labelled, and `LABELS` from the starter trio to `system`, `verdict`, `ask`. Settings stayed at 3 epochs, learning rate 2e-5, batch size 16, 128 tokens, seed 42.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
