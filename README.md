@@ -39,7 +39,7 @@
 
 ## What This Does
 
-Public posts from [r/patientgamers](https://www.reddit.com/r/patientgamers), a gaming subreddit for writing about games that are already out, not one release and not a launch thread. The text is long enough to collect 200 posts, and it is not one kind of writing: a finished review, a quit note, a question to the sub, and a Game of the Month pitch all show up in the same place. The labels are not chosen yet. These four distinctions are what showed up while reading, and the taxonomy comes after them.
+Public posts from [r/patientgamers](https://www.reddit.com/r/patientgamers), a gaming subreddit for writing about games that are already out, not one release and not a launch thread. The text is long enough to collect 200 posts, and it is not one kind of writing: a finished review, a quit note, a question to the sub, and a Game of the Month pitch all show up in the same place. The classifier sorts each post into `system`, `verdict`, or `ask`. The four distinctions below are the reading those labels came from. A fourth label, `dropout`, looked obvious and did not hold; that is written under the decision rule.
 
 ### Candidate distinctions
 
@@ -67,33 +67,55 @@ Posts this came from include the March 2026 "Chronicles of a Prolific Gamer" (Sp
      The decision rule is worth a point on its own and it's the thing most
      people leave out. Every taxonomy has a hardest boundary. Name yours. -->
 
-### `label_one`
+### `system`
 
-**Definition:**
-
-**Example 1:**
->
-
-**Example 2:**
->
-
-### `label_two`
-
-**Definition:**
+**Definition:** The writer has settled on an account of a game, and the post spells out at least one checkable rule of play: an input, a cost, a lock, or a condition that decides whether an action succeeds.
 
 **Example 1:**
->
+> Magical Drop VI. "Magical Drop's gameplay revolves around grouping like colored orbs that are destroyed when you place one in front of a column that consists of two or more (those making contact horizontally are subsequently destroyed as well)." The post recommends the game and never scores it. The rule is the whole account.
 
 **Example 2:**
->
+> Cyberpunk 2077, "the worst 'where did the time go' game." They finished, they recommend it, and they score it 7.75/10. They also write the perk lock: "deeper tiers of the perk trees being locked if you do not have the appropriate amount of base attribute points. You can use the perk points in any attribute tree, but you will be limited very quickly in what perks are even accessible if you don't have enough attribute points spent."
+
+### `verdict`
+
+**Definition:** The writer has settled on a judgment, of a game or of a way of playing, and the post does not spell out a rule of play.
+
+**Example 1:**
+> "How I Began to Avoid the 'Hours Played' Meta Game." The settled line is "A good game is a good game whether it's five hours or 50 hours or 500 hours." Return of the Obra Dinn is the example: $15, about nine hours, premise and music and story. The post never says what makes a deduction in that game succeed.
+
+**Example 2:**
+> The January 2026 indie month-in-review. Yes, Your Grace is "a VERY good story" and "a little bit on rails," scored 7/10. Citizen Sleeper is "sad sci fi capitalism" scored 7.5/10. Terror at Oakheart is "clunky feeling combat" scored 7/10. None of those sentences say what an action costs or what makes it succeed. "Dice RPG" names a genre. It is not a rule.
+
+### `ask`
+
+**Definition:** The writer is still asking the sub what to do, or what the rule for quitting should be, and the post would not stand as a finished account if the question were removed.
+
+**Example 1:**
+> "When do you decide to give up on a game?" Bastion is the anecdote: a couple of hours, "the combat was unsatisfying," "environments and enemies all felt very same-y," then they packed it in. No input, cost, lock, or success condition. The post ends on "How do you decide when it's time to give up on a game?"
+
+**Example 2:**
+> "How many hours is long enough to decide either you drop a game or continue playing it?" They have five hours in an unnamed game, "I don't know if I should continue or not," and they close with "what are your thoughts about this?"
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** `system` and `verdict`
 
-**The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
-     if the tone is heated." -->
+**The post, with no label attached:**
+
+> AC Odyssey, "Tried it for 20 hours but I'm moving on..." "This game feels very underwhelming and repetitive. After giving this game a proper shake for 20 hours recently (and this is my second attempt), I'm just not prepared to spend another 130 slogging through the rest of the content." Later: "Combat has no weight to it" and "Melee combat here is a bad souls-like." Also later: "Parkour mostly involves holding 'A' and letting the game figure out the rest." "Getting the drop on an enemy and stabbing them through the heart or cutting their throat means nothing if they're a higher level." "The game interrupts its own flow at times by making you build adrenaline and wait for the cooldowns on skills." Metacritic critics at 83%, Metacritic users at 6.9/10, and they agree with the user number.
+
+The case for `verdict`: the title is the decision, the pros are production and taste, and "no weight," "shallow as a puddle," and the two Metacritic numbers are a judgment. The mechanic sentences are there to justify a score he has already reached.
+
+The case for `system`: holding A, a stealth kill that fails a level check, and a skill that waits on adrenaline are not adjectives. A reader who has not played can say what the game does. The 6.9 is beside the point.
+
+Both cases hold. The rule is what breaks the tie.
+
+**The decision rule I used every time:** If the writer is still asking the sub what to do, the post is `ask`, even when the question includes a rule of play or a game they might quit. If they have settled, and the post spells out a checkable rule of play — an input, a cost, a lock, or a condition that decides whether an action succeeds — the post is `system`, even when the title is a score or a quit. Otherwise it is `verdict`. A genre list, an hour count, a score, and a feeling ("no weight," "spongey," "long combos") are not a rule.
+
+Under that rule the Odyssey post is `system`. They have settled ("I'm moving on"), and the post spells out the A button, the level check on a stealth kill, and the adrenaline cooldown.
+
+`dropout` was the label I tried and dropped. "I stopped" shows up inside all three of the labels that held: Odyssey explains the rules on the way out (`system`), the five-hour post is still asking (`ask`), and "Refunded, just couldn't get into it" is a settled feeling with no rule (`verdict`). The word "dropped" does not pick out one kind of post.
 
 
 
@@ -181,9 +203,9 @@ of next unit's variance. -->
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* The `system` / `verdict` / `ask` definitions, the Odyssey post, and eight posts written to sit on the boundaries. For Odyssey, the strongest case for each of the two labels, with no winner declared and the definitions left as written.
+- *What came back:* Both Odyssey cases were strong, so the tie was real. Three of the eight would not classify until the rule was explicit: a settled love letter with one stealth-kill level check; an open question that used that same level check as its example; a full rubric scorecard with a single "if they pull you, you cannot dodge" sentence.
+- *What I changed:* Dropped `dropout` as a label. Wrote the priority rule above. Tightened "rule of play" so a genre, an hour count, a score, or "it felt weightless" does not count, and so one spelled-out condition still does, even inside a scorecard.
 
 **Pre-labelling disclosure:**
 
