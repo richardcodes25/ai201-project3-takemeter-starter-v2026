@@ -259,6 +259,18 @@ The same 30 posts with bare label names, and no definitions file, scored accurac
 
 ## Run Log — Before
 
+Device: `mps`, Apple Silicon GPU (MPS), torch 2.14.1. Same settings as the first run: `distilbert-base-uncased`, 3 epochs, learning rate 2e-5, batch size 16, 128 tokens. `RUN_LABEL` is `before`.
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.467 | 0.400 | 0.433 | 0.067 |
+| Macro F1 | 0.258 | 0.228 | 0.202 | 0.056 |
+| F1 — `system` | 0.154 | 0.133 | 0.000 | 0.154 |
+| F1 — `verdict` | 0.619 | 0.550 | 0.605 | 0.069 |
+| F1 — `ask` | 0.000 | 0.000 | 0.000 | 0.000 |
+
+Accuracy moved 0.067 across the three seeds, under the ten-point line. It is still wide enough that a criterion landing inside that band cannot really be called either way. `system` F1 moved 0.154, and on seed 2024 it is 0.000. `ask` is 0.000 on every seed.
+
 <!-- Five criteria across three seeds. The notebook's section 6 prints the
      spread table; the Target and Verdict columns are yours. -->
 
@@ -272,19 +284,15 @@ The same 30 posts with bare label names, and no definitions file, scored accurac
 
 ### Confusion matrix
 
-<!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
-     An image of a matrix earns nothing. -->
+Seed 42, the first of the three. Rows are true labels, columns are the model's guesses.
 
-| true \ predicted |  |  |  |
+| true \ predicted | system | verdict | ask |
 |---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+| **system** | 1 | 11 | 0 |
+| **verdict** | 0 | 13 | 0 |
+| **ask** | 0 | 5 | 0 |
 
-**My biggest off-diagonal number, and what it means:**
-<!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
-     direction. "7 real analysis posts were called hot_take and only 3 went the
-     other way" is a direction, not just an error rate. -->
+**My biggest off-diagonal number, and what it means:** 11 real `system` posts were called `verdict`, and 0 real `verdict` posts were called `system` — the model leans toward `verdict` on the pair the decision rule exists to split.
 
 
 
