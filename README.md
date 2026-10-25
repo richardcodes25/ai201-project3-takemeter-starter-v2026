@@ -231,6 +231,12 @@ Under that rule the Odyssey post is `system`. They have settled ("I'm moving on"
 - *What came back:* Ten `analysis`, ten `hot_take`, ten `reaction`, copied from `staff_posts.csv` without editing the text.
 - *What I changed:* Nothing after the key was opened. The comparison was 30/30. The seven posts staff marked hard are written up above with the rule that already covered them.
 
+**Moment 6**
+
+- *What I asked for:* One change aimed at the thinnest label, then the same three seeds with `RUN_LABEL` set to `after`.
+- *What came back:* Thirty posts that are still questions to the sub, appended as `ask`. Training wrote `results_three_seeds_after.json`.
+- *What I changed:* Nothing in the old 200 rows, and nothing in the training settings. The after log says the 18% floor is now met and `ask` F1 is still 0.000.
+
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
      Don't fill these in during unit 5.
@@ -418,24 +424,25 @@ There are no disagreements. `agreement.py` matched every post. Staff had marked 
 
 ## The Improvement
 
-**What I changed:**
+**What I changed:** Added 30 posts, all labelled `ask`. No existing row was relabelled. Epochs, learning rate, batch size, and token length stayed at 3, 2e-5, 16, and 128. The same three seeds were retrained with `RUN_LABEL` set to `after`.
 
-**Which diagnosis pointed at it:**
+The 30 are public r/patientgamers self-posts whose point is still a question to the sub (what to play next, whether a DLC is worth buying, whether anyone else bounced off a game). Reviews whose title merely contains a question mark were left out. Each note is `pre-labelled, checked`. The file is now 230 rows: `system` 82 (35.7%), `verdict` 89 (38.7%), `ask` 59 (25.7%).
+
+**Which diagnosis pointed at it:** `ask` was the thinnest label and the worst F1, 0.000 on every seed, 29 posts and 14.5% of the file. The staff check was 30/30 on a different taxonomy, so this was not a boundary I had applied two ways. The diagnosis did not point at the learning rate or the number of epochs.
 
 ### Run Log — After
 
+Same device, `mps`, torch 2.14.1. In criterion 2 the three numbers are `system` / `verdict` / `ask`.
+
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Held-out accuracy | ≥ 0.60 on every seed | 0.514 | 0.457 | 0.400 | MISSED |
+| 2. Per-label F1 | `system` ≥ 0.55, `verdict` ≥ 0.55, `ask` ≥ 0.45, every seed | 0.526 / 0.619 / 0.000 | 0.583 / 0.486 / 0.000 | 0.250 / 0.533 / 0.000 | MISSED |
+| 3. Each label's share of `labels.csv` | 18%–50% | ask 25.7% | ask 25.7% | ask 25.7% | MET |
+| 4. Confident third minus unsure third | ≥ 0.15 on every seed | -0.091 | 0.091 | 0.273 | MISSED |
+| 5. Second pass on the text-sorted first 30 | ≥ 24/30 | 24/30 | — | — | MET |
 
-**Did it help, and how do I know:**
-
-<!-- If it didn't, say so. Relabelling that didn't help is a genuinely
-     interesting result and earns full credit. -->
+**Did it help, and how do I know:** It fixed the balance and it did not fix `ask`. Criterion 3 is met, 25.7% instead of 14.5%. `ask` F1 is still 0.000 on every seed. On seed 42, 8 of 9 real `ask` posts were called `verdict` and 1 was called `system`. Accuracy rose on seeds 42 and 7 (0.467 to 0.514, 0.400 to 0.457) and fell on seed 2024 (0.433 to 0.400). None reach 0.60. `system` F1 rose on all three seeds, and seed 7 now clears 0.55, but seeds 42 and 2024 do not, and `verdict` on seed 7 fell from 0.550 to 0.486. More question posts moved the majority lean. They did not teach the model to say `ask`.
 
 
 
