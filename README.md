@@ -237,20 +237,21 @@ Under that rule the Odyssey post is `system`. They have settled ("I'm moving on"
 <!-- Both models on the same posts. `python baseline.py --trained results.json`
      prints this table for you. -->
 
+Both columns are the same 30 posts in `test_split.csv`. The baseline is `facebook/bart-large-mnli` on this machine's Apple GPU, prompted with `label_definitions.txt`.
+
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.400 | 0.467 | +0.067 |
+| Macro F1 | 0.254 | 0.258 | +0.003 |
+| F1 — `ask` | 0.000 | 0.000 | +0.000 |
+| F1 — `system` | 0.541 | 0.154 | -0.387 |
+| F1 — `verdict` | 0.222 | 0.619 | +0.397 |
 
-**What I predicted before I looked:**
-<!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
-     prediction made afterwards isn't one. -->
+**What I predicted before I looked:** The trained model will beat the baseline on `verdict`, where the zero-shot F1 is 0.222, because that definition is the absence of a rule and the fine-tuned model saw the most examples of settled reviews that never state one; it will not pull ahead on `ask`, which the baseline also scored at 0.000 on five posts.
 
-**What the gap actually means:**
-<!-- If the baseline matched your trained model, your fine-tuning added
-     nothing — and that is a real finding, not a failure. Say it plainly. -->
+**What the gap actually means:** Fine-tuning barely moved the headline numbers. Accuracy rose by 0.067 and macro F1 by 0.003, which is a tie. The change is a swap: the trained model gained `verdict` and gave up `system`, the label the definition-prompted baseline was already finding. `ask` stayed at 0.000 for both, on five test posts. Training did not get better at the rule-of-play boundary.
+
+The same 30 posts with bare label names, and no definitions file, scored accuracy 0.433 and macro F1 0.396 (`ask` 0.533, `system` 0.154, `verdict` 0.500). The definitions cost 0.033 accuracy and 0.142 macro F1. They raised `system` and wiped out `ask` and most of `verdict`. The table above is the definitions run, not the bare-names run.
 
 
 
