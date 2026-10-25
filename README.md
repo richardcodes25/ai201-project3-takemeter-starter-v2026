@@ -217,7 +217,7 @@ Under that rule the Odyssey post is `system`. They have settled ("I'm moving on"
 - *What came back:* All five are checkable from `labels.csv` or from the notebook's accuracy, per-label F1, and the two confidence thirds, plus a sort that fixes which 30 rows the agreement check uses. The easy case on accuracy is that question marks and scores are loud features. The hard case is that one seed can drop the Odyssey-style posts into the 15% test split. The same pair of reasons showed up on the F1 floors, the 50% cap, the 0.15 confidence gap, and 24/30.
 - *What I changed:* Nothing in the numbers. Criterion 5 names the sort so the 30 rows are not a private sample.
 
-**Pre-labelling disclosure:** All 200 rows were pre-labelled from the written definitions and then corrected, as above. None were labelled unaided, so none are marked `cold`. The note on every row is `pre-labelled, checked`.
+**Pre-labelling disclosure:** All 200 rows in the first file, and the 30 `ask` posts added later, were pre-labelled from the written definitions and then corrected. None were labelled unaided, so none are marked `cold`. The note on every row is `pre-labelled, checked`.
 
 **Moment 4**
 
@@ -236,6 +236,12 @@ Under that rule the Odyssey post is `system`. They have settled ("I'm moving on"
 - *What I asked for:* One change aimed at the thinnest label, then the same three seeds with `RUN_LABEL` set to `after`.
 - *What came back:* Thirty posts that are still questions to the sub, appended as `ask`. Training wrote `results_three_seeds_after.json`.
 - *What I changed:* Nothing in the old 200 rows, and nothing in the training settings. The after log says the 18% floor is now met and `ask` F1 is still 0.000.
+
+**Moment 7**
+
+- *What I asked for:* Read the three confusion matrices and the agreement report, and say whether the misses were a labelling problem or a model problem. Argue the opposite of a MET where the number was on the line.
+- *What came back:* Every matrix dumps `system` and `ask` into `verdict`. The staff check was 30/30 on `analysis` / `hot_take` / `reaction`, so it is not evidence this boundary was applied two ways. The second pass was 24/30, which is the target, and all six misses were `system` versus `verdict`. `verdict` F1 of 0.550 on seed 7 meets 0.55 and does not save a criterion that also names `system` and `ask`.
+- *What I changed:* No target was lowered. The one change was more `ask` posts. The after matrix still has zero `ask` predictions, which is the pattern above, not a new one.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
@@ -450,13 +456,15 @@ Same device, `mps`, torch 2.14.1. In criterion 2 the three numbers are `system` 
 
 ## What's Still Broken
 
-<!-- For each criterion still missed: what you'd do, and why you stopped. -->
+Criteria 3 and 5 are met. These three are not.
 
+**1. Held-out accuracy, still under 0.60 on every seed (0.514, 0.457, 0.400).** Next I would raise the 128-token cap, once, and retrain the same three seeds. The rule of play is often deep in a long review, and the zero-shot model reading the whole post beat the fine-tune on `system`. I stopped because this unit was one change, and that change was the thin label. A second setting in the same rerun would have made the two effects impossible to separate.
 
+**2. Per-label F1.** `ask` is still 0.000 on every seed after 30 more examples, so I would not add another batch of questions. The question is usually in the title, which the 128-token window already sees, and the model still never says `ask`. `system` clears 0.55 on seed 7 only, and `verdict` on that seed fell to 0.486. The next single change for this row is the same token-length run as criterion 1. I stopped for the same reason: one change, already spent.
 
-**The gap between what I meant my labels to capture and what the model
-learned:**
-<!-- Two sentences. Your confusion matrix is the evidence. -->
+**4. Confidence gap, still not ≥ 0.15 on every seed (−0.091, 0.091, 0.273).** I would not train for the gap. On seed 42 the sure third is less accurate than the unsure third, which is what a model looks like when its sure guess is `verdict` and `verdict` is often wrong. The gap starts meaning something after the model has more than one guess. I stopped because chasing it on its own would be a second change aimed at a symptom.
+
+**The gap between what I meant my labels to capture and what the model learned:** The labels were meant to separate a spelled-out rule of play, a settled judgment with no rule, and a writer still asking the sub. The seed-42 matrix after the extra asks is still one guess: 7 of 12 real `system` posts and 8 of 9 real `ask` posts were called `verdict`, and `ask` was predicted 0 times. The typed matrix above, from before that change, is the same direction with a harder lean, 11 of 12 and 5 of 5.
 
 
 
