@@ -225,6 +225,12 @@ Under that rule the Odyssey post is `system`. They have settled ("I'm moving on"
 - *What came back:* The data check printed nothing to fix. The split put 5 `ask` posts in the test set. Training finished on `mps` and wrote `results.json` and `test_split.csv`.
 - *What I changed:* Name and email in the notebook, so the results are labelled, and `LABELS` from the starter trio to `system`, `verdict`, `ask`. Settings stayed at 3 epochs, learning rate 2e-5, batch size 16, 128 tokens, seed 42.
 
+**Moment 5**
+
+- *What I asked for:* Label the 30 staff posts under `data/staff_taxonomy.md`, before opening the staff labels.
+- *What came back:* Ten `analysis`, ten `hot_take`, ten `reaction`, copied from `staff_posts.csv` without editing the text.
+- *What I changed:* Nothing after the key was opened. The comparison was 30/30. The seven posts staff marked hard are written up above with the rule that already covered them.
+
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
      Don't fill these in during unit 5.
@@ -334,47 +340,74 @@ Seed 42, the first of the three. Rows are true labels, columns are the model's g
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** ___ / 30 = ___%
+**Agreement rate:** 30 / 30 = 100%
 
-<!-- Nobody grades this number. A 60% who argues every disagreement from the
-     stated rules beats a 95% who wrote "staff was right" nine times. Several
-     of the 30 were chosen because they're genuinely ambiguous — you should be
-     winning some of these. -->
-
-**Disagreements**
-
-<!-- Three lines each: the post, both labels, and who you think is right and
-     why — grounded in the staff definitions you were both applying.
-
-     Then sort each into one of three piles:
-       (a) the rule covered it and I applied it loosely → a consistency problem
-       (b) the rule genuinely doesn't say               → a gap in the definitions
-       (c) the rule is ambiguous here and my reading is defensible → argue it.
-           This is a legitimate win.
-
-     Pile (a) is the one that matters most for your diagnosis: if you applied a
-     written rule two different ways on 30 posts, that is direct evidence about
-     what you did across your own 200. -->
+There are no disagreements. `agreement.py` matched every post. Staff had marked seven of the thirty as hard, and those seven got the same label from both sides. The posts are not obvious. The rule is tight: on each hard post, rules 1–3 already pick a side, so a second reading that follows them lands in the same place.
 
 **1.**
-> *The post:*
+> *The post:* "Carbon plates aren't the whole story. My times dropped 2% in the shoes and another 2% the following year in the same pair, when the only thing that changed was going from 35 to 50 miles a week."
 >
-> *Staff said / I said:*
+> *Staff said / I said:* `analysis` / `analysis`
 >
-> *My call, and why:*
+> *My call, and why:* The opening clause is a shoe opinion. The second sentence is two comparable drops in the same pair, with mileage as the thing that changed. Rule 1: the fact carries the argument, so it is `analysis`.
 >
-> *Which pile:*
+> *Which pile:* Not a disagreement. A loose reading would have stopped at the first clause and called it `hot_take`, which would have been pile (a).
 
 **2.**
-> *The post:*
+> *The post:* "Three of us ran the same session on the same day, different shoes, within 10 seconds of each other over 5 miles. I'm not saying shoes do nothing, but whatever they do was smaller than the noise between three people."
 >
-> *Staff said / I said:*
+> *Staff said / I said:* `analysis` / `analysis`
 >
-> *My call, and why:*
+> *My call, and why:* The sample is three people and the conclusion is hedged. The claim still rests on a checkable observation, within 10 seconds over 5 miles. Rule 1.
 >
-> *Which pile:*
+> *Which pile:* Not a disagreement. Calling it `hot_take` because the sample is small would ignore a fact that is doing the work. Pile (a) if I had.
 
-**What the pattern in my disagreements tells me:**
+**3.**
+> *The post:* "Times are down about 3% since the shoe rules changed, so obviously the shoes are the whole story and the sport has a problem."
+>
+> *Staff said / I said:* `hot_take` / `hot_take`
+>
+> *My call, and why:* This is the taxonomy's own example. The 3% decorates a conclusion the writer already holds. "So obviously" is the argument, not the number. Rule 1.
+>
+> *Which pile:* Not a disagreement. The rule names this shape.
+
+**4.**
+> *The post:* "Nobody actually enjoys the long run. They enjoy having done it, which is a completely different thing, and the sport would be more honest if it said so."
+>
+> *Staff said / I said:* `hot_take` / `hot_take`
+>
+> *My call, and why:* It sounds reflective. It is a claim about everyone, not a report of the writer's own morning. Rule 2 puts a general claim in `hot_take`.
+>
+> *Which pile:* Not a disagreement. Reading the tone as `reaction` would be pile (a).
+
+**5.**
+> *The post:* "Every injury thread on this forum is the same injury and the same three replies."
+>
+> *Staff said / I said:* `hot_take` / `hot_take`
+>
+> *My call, and why:* It could be checked, and no count is given. The writer is asserting, not showing. Rule 1 requires the fact to be on the page.
+>
+> *Which pile:* Not a disagreement. Treating "could be checked" as `analysis` would be pile (a).
+
+**6.**
+> *The post:* "Third DNF this year. I don't really want to talk about it, just wanted to put it somewhere."
+>
+> *Staff said / I said:* `reaction` / `reaction`
+>
+> *My call, and why:* "Third" is countable, and nothing is argued from it. Rule 3 does not turn a personal count into `analysis`. The post is the writer reporting their own state.
+>
+> *Which pile:* Not a disagreement. Promoting the count would be pile (a).
+
+**7.**
+> *The post:* "Just realised the shoes I set every PB in this year are the ones I bought by accident in the wrong size."
+>
+> *Staff said / I said:* `reaction` / `reaction`
+>
+> *My call, and why:* It can be read as a wry claim about shoe discourse. The words report the writer's own realisation, now. Rule 2.
+>
+> *Which pile:* Not a disagreement. A `hot_take` reading is available and the rule already rejects it.
+
+**What the pattern in my disagreements tells me:** There is no split to sort into piles (b) or (c). The seven hard posts were all places the rule already spoke, and I applied it the way it is written. That is evidence the staff rules can be followed consistently. It does not yet say whether my own 200 labels were consistent, because those were made under a different taxonomy.
 
 
 
