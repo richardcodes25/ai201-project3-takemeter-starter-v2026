@@ -282,11 +282,13 @@ Accuracy moved 0.067 across the three seeds, under the ten-point line. It is sti
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Held-out accuracy | ≥ 0.60 on every seed | 0.467 | 0.400 | 0.433 | MISSED |
+| 2. Per-label F1 | `system` ≥ 0.55, `verdict` ≥ 0.55, `ask` ≥ 0.45, every seed | 0.154 / 0.619 / 0.000 | 0.133 / 0.550 / 0.000 | 0.000 / 0.605 / 0.000 | MISSED |
+| 3. Each label's share of `labels.csv` | 18%–50% | ask 14.5% | ask 14.5% | ask 14.5% | MISSED |
+| 4. Confident third minus unsure third | ≥ 0.15 on every seed | 0.200 | 0.000 | 0.000 | MISSED |
+| 5. Second pass on the text-sorted first 30 | ≥ 24/30 | 24/30 | — | — | MET |
+
+Criterion 3 is one file, so the three seed columns are the same measurement. Criterion 5 is one hidden-label pass, not three training runs. In criterion 2 the three numbers in each cell are `system` / `verdict` / `ask`. `verdict` clears 0.55 on all three seeds, including seed 7 at 0.550. The row is still a miss because `system` and `ask` do not.
 
 ### Confusion matrix
 
@@ -311,22 +313,23 @@ Seed 42, the first of the three. Rows are true labels, columns are the model's g
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Held-out accuracy | ≥ 0.60 on every seed | MISSED | 0.467, 0.400, and 0.433 are all under 0.60. Seed 42 being the high one does not carry the other two. |
+| 2 | Per-label F1 | `system` ≥ 0.55, `verdict` ≥ 0.55, `ask` ≥ 0.45, every seed | MISSED | `verdict` is 0.619, 0.550, 0.605. `system` is 0.154, 0.133, 0.000. `ask` is 0.000 on every seed. One label clearing its bar does not meet a criterion that names all three. |
+| 3 | Share of `labels.csv` | each label 18%–50% | MISSED | `system` 41.0%, `verdict` 44.5%, `ask` 14.5% (29 of 200). The cap holds. The floor does not. |
+| 4 | Confidence gap | ≥ 0.15 on every seed | MISSED | Seed 42 is 0.200. Seeds 7 and 2024 are 0.000. A gap that shows up once is not the target. |
+| 5 | Second pass | ≥ 24 of the text-sorted first 30 | MET | Labels hidden, definitions only, then compared. 24 matched. The target is at least 24, and the reason for picking 24 was that six boundary posts could still be argued. The six mismatches are all `system` versus `verdict`. |
 
 **Diagnoses**
 
-<!-- For each miss: the cause, and how you know. The four common causes are:
-     too few examples for a label, a boundary you applied inconsistently, a
-     genuinely hard label pair, and a task the model can't reach from this
-     much data.
+**1 and 2, accuracy and `system`.** The model is not reading the rule-of-play boundary. On seed 42 it called 11 of 12 real `system` posts `verdict` and 0 `verdict` posts `system`. On seed 2024 it called every test post `verdict`, so `system` F1 is 0.000. Seed 7 is the same shape, 11 of 12 `system` posts called `verdict`. Accuracy sits on the `verdict` share of a 30-post test split (13 of 30 is 0.433) because that is almost the only guess.
 
-     ⚠️ Use your agreement report as evidence. It is the only instrument you
-     have that can tell a LABELLING problem from a MODEL problem, and this
-     section is graded on whether you used it that way. -->
+This is the pair the taxonomy already called the hard one, and 128 tokens of a long review is a bad view of a rule buried in the body. The same seed-42 posts, given the definitions and no training, scored `system` F1 0.541. The fine-tune scored 0.154. The boundary is in the text. Training did not pick it up from 200 examples.
+
+The agreement check does not turn this into a labeling failure. That check was someone else's taxonomy, `analysis` / `hot_take` / `reaction`, and it was 30/30, including the seven posts staff marked hard. I can apply a written rule one way when the rule decides the post. The check on my own labels is criterion 5: 24/30, with the six misses on `system` versus `verdict`, which is the slack that target allowed. I am not calling a consistency problem that my own bar still calls met.
+
+**2, `ask`, and 3.** `ask` has 29 posts, 14.5% of the file, and 5 in each of these test splits. F1 is 0.000 on every seed, and on seed 42 all 5 were called `verdict`. The cause is too few examples. Across the archive, 29 posts were actually still asking the sub. Finished reviews were not relabeled as questions to clear 18%. Criterion 3 misses for that same reason. The 18% line stays. It can be measured, and it was missed. Lowering it would be changing a number because the count came in short.
+
+**4.** On seeds 7 and 2024 the most-sure third and the least-sure third are right at the same rate, 0.400 and 0.500. Each third is 10 posts, so 0.15 is about two posts, and the gap is zero, not one post short. A model that almost only says `verdict` cannot be more right when it is more sure. The sure guess and the unsure guess are the same guess. Seed 42's gap of 0.200 does not rescue a target that has to hold on the other two seeds.
 
 
 
